@@ -9,7 +9,7 @@
 # docker run -d --rm --name headless-chromium -p 9222:9222 adieuadieu/headless-chromium-for-aws-lambda
 #
 
-FROM amazonlinux:2017.03
+FROM amazonlinux:latest
 
 # ref: https://chromium.googlesource.com/chromium/src.git/+refs
 ARG VERSION
@@ -22,6 +22,12 @@ WORKDIR /
 
 ADD build.sh /
 ADD .gclient /build/chromium/
+
+run yum clean all
+RUN yum update -y
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum groupinstall -y "Development tools"
+
 
 RUN sh /build.sh
 
