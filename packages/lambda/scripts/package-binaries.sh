@@ -21,10 +21,10 @@ packageBinary() {
 
   cd "$PACKAGE_DIRECTORY/builds/$BUILD_NAME"
   
-  DOCKER_IMAGE=headless-$BUILD_NAME-for-aws-lambda
+  DOCKER_IMAGE=headless-$BUILD_NAME
   VERSION=$(jq -r ".$CHANNEL" version.json)
   BUILD_PATH="dist/$BUILD_NAME"
-  ZIPFILE_PATH="$CHANNEL-headless-$BUILD_NAME-$VERSION-amazonlinux-2017-03.zip"
+  ZIPFILE_PATH="$CHANNEL-headless-$BUILD_NAME-$VERSION-amazonlinux.zip"
 
   if [ ! -f "dist/$ZIPFILE_PATH" ]; then
     echo "Packaging $BUILD_NAME version $VERSION ($CHANNEL)"
@@ -32,7 +32,7 @@ packageBinary() {
     mkdir -p "$BUILD_PATH"
 
     # Extract binary from docker image
-    docker run -dt --rm --name "$DOCKER_IMAGE" "adieuadieu/$DOCKER_IMAGE:$VERSION"
+    docker run -dt --rm --name "$DOCKER_IMAGE" "$DOCKER_IMAGE:$VERSION"
     docker cp "$DOCKER_IMAGE":/bin/headless-"$BUILD_NAME" "$BUILD_PATH"
     docker stop "$DOCKER_IMAGE"
 
@@ -61,7 +61,5 @@ else
 
   for DOCKER_FILE in */Dockerfile; do
     packageBinary "${DOCKER_FILE%%/*}" stable
-    packageBinary "${DOCKER_FILE%%/*}" beta
-    packageBinary "${DOCKER_FILE%%/*}" dev
   done
 fi

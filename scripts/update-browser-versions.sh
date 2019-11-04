@@ -39,7 +39,7 @@ for BUILD in */Dockerfile; do
   cd "$BUILD_NAME" || exit
 
   CHANNEL_LIST=$(jq -r ". | keys | tostring" ./version.json | sed -e 's/[^A-Za-z,]//g' | tr , '\n')
-  DOCKER_IMAGE=headless-$BUILD_NAME-for-aws-lambda
+  DOCKER_IMAGE=headless-$BUILD_NAME
 
   # Iterate over the channels:
   while IFS= read -r CHANNEL; do

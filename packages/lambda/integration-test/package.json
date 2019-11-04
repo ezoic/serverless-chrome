@@ -8,7 +8,7 @@
     "chrome-remote-interface": "0.25.5"
   },
   "devDependencies": {
-    "serverless": "1.27.2"
+    "serverless": "^1.56.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

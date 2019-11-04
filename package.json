@@ -20,7 +20,8 @@
     "precommit": "lint-staged",
     "prettier": "prettier-eslint --no-semi --single-quote --trailing-comma es5 --write",
     "release": "scripts/release.sh",
-    "postversion": "scripts/sync-package-versions.sh"
+    "postversion": "scripts/sync-package-versions.sh",
+    "publish": "publish-to-git"
   },
   "repository": {
     "type": "git",

@@ -22,11 +22,6 @@ if [ -z "$GITHUB_TOKEN" ]; then
   exit 1
 fi
 
-if ! npm whoami -s && [ -z "$NPM_TOKEN" ]; then
-  echo "Error: Missing NPM credentials or NPM_TOKEN environment variable." 
-  exit 1
-fi
-
 ORIGIN_URL=$(git config --get remote.origin.url)
 GITHUB_ORG=$(echo "$ORIGIN_URL" | sed 's|.*:||;s|/.*$||')
 GITHUB_REPO=$(echo "$ORIGIN_URL" | sed 's|.*/||;s|\.[^\.]*$||')

@@ -20,7 +20,7 @@ const DEVTOOLS_HOST = 'http://127.0.0.1'
 // when the *lambda* container is reused.
 let chromeInstance
 
-export default async function launch ({
+exports.launch = async function ({
   flags = [],
   chromePath,
   port = DEVTOOLS_PORT,
