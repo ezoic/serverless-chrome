@@ -128,7 +128,7 @@ for BUILD in */Dockerfile; do
     [ -z "$CHANNEL" ] || [ "${CHANNEL#\#}" != "$CHANNEL" ] && continue
 
     VERSION=$(jq -r ".$CHANNEL" version.json)
-    ZIPFILE=$CHANNEL-headless-$BUILD_NAME-$VERSION-amazonlinux-2017-03.zip
+    ZIPFILE=$CHANNEL-headless-$BUILD_NAME-$VERSION-amazonlinux.zip
 
     (
       if [ ! -f "dist/$ZIPFILE" ]; then
@@ -140,10 +140,10 @@ for BUILD in */Dockerfile; do
 
       echo "Uploading $ZIPFILE to GitHub"
 
-      upload_release_asset "$ZIPFILE" "$CHANNEL-headless-$BUILD_NAME-amazonlinux-2017-03.zip"
+      upload_release_asset "$ZIPFILE" "$CHANNEL-headless-$BUILD_NAME-amazonlinux.zip"
     )
   
-    RELEASE_BODY="$RELEASE_BODY$BUILD_NAME $VERSION ($CHANNEL channel) for amazonlinux:2017.03\n"
+    RELEASE_BODY="$RELEASE_BODY$BUILD_NAME $VERSION ($CHANNEL channel) for amazonlinux\n"
   done << EOL
 $CHANNEL_LIST
 EOL
